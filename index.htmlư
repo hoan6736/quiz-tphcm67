@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quiz TP.HCM</title>
+<style>
+:root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#111827;color:#f8fafc}.app{min-height:100vh;background:light-dark(#fff7fb,#171326);color:light-dark(#35263f,#fff7ff);padding:28px 18px;position:relative;overflow:hidden}.app:before,.app:after{content:'';position:absolute;border-radius:50%;opacity:.45;pointer-events:none}.app:before{width:220px;height:220px;background:#ffd6e7;top:-70px;left:-70px}.app:after{width:280px;height:280px;background:#d9efff;right:-100px;bottom:-100px}.wrap{max-width:850px;margin:auto;position:relative;z-index:1}.hero{text-align:center;padding:18px 10px 20px}.badge{display:inline-block;padding:8px 14px;border-radius:999px;background:#ff7fa8;color:white;font-weight:900;font-size:13px;box-shadow:0 8px 20px #ff7fa833}.hero h1{font-size:clamp(30px,6vw,52px);margin:13px 0 7px;letter-spacing:-1px}.hero p{margin:0;opacity:.72}.card{background:light-dark(#fff,#251d38);border:2px solid light-dark(#ffd9e7,#403453);border-radius:28px;padding:28px;box-shadow:0 18px 50px #7c52752b}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:20px;font-weight:900;color:#9b5b7d}.bar{height:11px;background:light-dark(#ffe8f0,#3b304d);border-radius:20px;overflow:hidden;margin-bottom:28px}.fill{height:100%;width:0;background:linear-gradient(90deg,#ff8fb1,#a88cff);transition:.3s;border-radius:20px}.q{font-size:25px;font-weight:900;line-height:1.3;margin-bottom:20px}.answers{display:grid;gap:12px}.ans{border:2px solid light-dark(#f2dce6,#514564);background:light-dark(#fffafd,#2c2340);color:inherit;border-radius:18px;padding:15px 17px;text-align:left;font-size:16px;font-weight:750;cursor:pointer;transition:.15s;box-shadow:0 4px 12px #9b5b7d12}.ans:hover{transform:translateY(-2px) scale(1.01);border-color:#ff8fb1;background:light-dark(#fff1f6,#352944)}.ans.correct{background:#dcfce7;border-color:#55bd7a;color:#14532d}.ans.wrong{background:#ffe4e8;border-color:#ed7180;color:#7f1d1d}.feedback{min-height:28px;margin:16px 0;font-weight:850}.next{width:100%;padding:15px;border:0;border-radius:17px;background:linear-gradient(90deg,#ff7fa8,#a88cff);color:#fff;font-weight:950;font-size:16px;cursor:pointer;box-shadow:0 8px 18px #a88cff33}.next:disabled{opacity:.45;cursor:not-allowed}.result{text-align:center}.score{font-size:64px;font-weight:950;margin:8px 0;color:#ff6f9d}.restart{margin-top:15px}.small{font-size:13px;opacity:.7;margin-top:15px;text-align:center}@media(max-width:600px){.card{padding:20px}.q{font-size:21px}}
+.flash{position:fixed;inset:0;pointer-events:none;opacity:0;z-index:20}.flash.blue{animation:blueFlash .65s ease-out}.flash.red{animation:redFlash .65s ease-out}.burst{position:fixed;inset:0;pointer-events:none;z-index:21;overflow:hidden}.spark{position:absolute;width:7px;height:7px;border-radius:50%;background:#29a9ff;box-shadow:0 0 12px #29a9ff;animation:burst 800ms ease-out forwards}.thumb{position:fixed;left:50%;top:50%;font-size:90px;transform:translate(-50%,-50%) scale(.2);opacity:0;z-index:22;pointer-events:none}.thumb.show{animation:thumbDown .75s ease-out forwards}@keyframes blueFlash{0%{opacity:.65;background:#18a8ff}100%{opacity:0;background:#18a8ff}}@keyframes redFlash{0%{opacity:.55;background:#ef3340}100%{opacity:0;background:#ef3340}}@keyframes burst{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--x),var(--y)) scale(.1);opacity:0}}@keyframes thumbDown{0%{transform:translate(-50%,-50%) scale(.2);opacity:0}25%{transform:translate(-50%,-50%) scale(1.2);opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+</style>
+</head>
+<body>
+<div class="app"><div class="wrap">
+<section class="hero"><span class="badge">🌸🌆 QUIZ TP.HCM 🌆🌸</span><h1>✨ Cùng khám phá TP.HCM nhé! ✨</h1><p>💗 10 câu hỏi vui • Lịch sử • Địa danh • Những điều thú vị</p></section>
+<div class="card" id="game"></div>
+<p class="small">🌷 Chọn đáp án bạn thích rồi bấm “Câu tiếp theo” nha! 💕</p>
+</div></div>
+<div class="flash" id="flash"></div><div class="burst" id="burst"></div><div class="thumb" id="thumb">👎</div>
+<script>
+const questions=[
+{q:'TP.HCM còn có tên gọi quen thuộc nào?',a:['Sài Gòn','Hà Nội','Huế','Đà Nẵng'],c:0,e:'Tên gọi Sài Gòn vẫn được dùng rất phổ biến trong đời sống.'},
+{q:'Tên TP.HCM chính thức được đặt vào năm nào?',a:['1945','1975','1976','1980'],c:2,e:'Năm 1976, thành phố chính thức mang tên Thành phố Hồ Chí Minh.'},
+{q:'Dinh Độc Lập nằm trên đường nào?',a:['Nam Kỳ Khởi Nghĩa','Đồng Khởi','Nguyễn Huệ','Lê Lợi'],c:0,e:'Dinh Độc Lập nằm tại 135 Nam Kỳ Khởi Nghĩa.'},
+{q:'Bưu điện Trung tâm Sài Gòn nổi tiếng nằm cạnh công trình nào?',a:['Nhà thờ Đức Bà','Chợ Bến Thành','Thảo Cầm Viên','Bến Nhà Rồng'],c:0,e:'Bưu điện Trung tâm Sài Gòn nằm ngay bên cạnh Nhà thờ Đức Bà.'},
+{q:'Con sông lớn chảy qua trung tâm TP.HCM là sông nào?',a:['Sông Hồng','Sông Hương','Sông Sài Gòn','Sông Thu Bồn'],c:2,e:'Sông Sài Gòn là một trong những nét đặc trưng của thành phố.'},
+{q:'Chợ Bến Thành nằm ở quận nào theo cách gọi quận trước đây?',a:['Quận 1','Quận 3','Quận 5','Quận 10'],c:0,e:'Chợ Bến Thành nằm tại khu vực trung tâm, thuộc Quận 1 theo cách gọi trước đây.'},
+{q:'Bến Nhà Rồng gắn với sự kiện lịch sử nào?',a:['Nơi Bác Hồ ra đi tìm đường cứu nước','Chiến thắng Điện Biên Phủ','Ngày thành lập ASEAN','Cách mạng tháng Tám ở Hà Nội'],c:0,e:'Bến Nhà Rồng gắn với việc Nguyễn Tất Thành ra đi tìm đường cứu nước năm 1911.'},
+{q:'Đường phố đi bộ nổi tiếng ở trung tâm TP.HCM là?',a:['Nguyễn Huệ','Phạm Ngọc Thạch','Võ Văn Tần','Cách Mạng Tháng Tám'],c:0,e:'Phố đi bộ Nguyễn Huệ là địa điểm sinh hoạt, vui chơi nổi tiếng.'},
+{q:'TP.HCM thuộc vùng địa lý nào?',a:['Đồng bằng sông Cửu Long','Đông Nam Bộ','Tây Nguyên','Bắc Trung Bộ'],c:1,e:'TP.HCM thuộc vùng Đông Nam Bộ.'},
+{q:'Biểu tượng quen thuộc của TP.HCM trên nhiều bưu ảnh là công trình nào?',a:['Landmark 81','Chợ Bến Thành','Cầu Rồng','Tháp Rùa'],c:1,e:'Chợ Bến Thành là một biểu tượng du lịch nổi tiếng của thành phố.'}
+];
+
+let i=0,score=0,chosen=false;
+const game=document.getElementById('game');
+
+function render(){
+const x=questions[i];
+game.innerHTML=`<div class="top"><span>Câu ${i+1}/${questions.length}</span><span>⭐ ${score} điểm</span></div>
+<div class="bar"><div class="fill" style="width:${i/questions.length*100}%"></div></div>
+<div class="q">${x.q}</div>
+<div class="answers">${x.a.map((v,n)=>`<button class="ans" onclick="pick(${n})">${String.fromCharCode(65+n)}. ${v}</button>`).join('')}</div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next" disabled onclick="goNext()">Câu tiếp theo →</button>`;
+}
+
+function pick(n){
+if(chosen)return;
+chosen=true;
+const x=questions[i],buttons=document.querySelectorAll('.ans');
+buttons.forEach(b=>b.disabled=true);
+if(n===x.c){
+score++;
+buttons[n].classList.add('correct');
+document.getElementById('feedback').textContent='🎉 Chính xác! '+x.e;
+celebrateCorrect();
+}else{
+buttons[n].classList.add('wrong');
+buttons[x.c].classList.add('correct');
+document.getElementById('feedback').textContent='❌ Chưa đúng! '+x.e;
+celebrateWrong();
+}
+document.getElementById('next').disabled=false;
+}
+
+function celebrateCorrect(){
+const f=document.getElementById('flash');
+f.className='flash blue';
+setTimeout(()=>f.className='flash',700);
+const b=document.getElementById('burst');
+b.innerHTML='';
+for(let k=0;k<28;k++){
+const s=document.createElement('span');
+s.className='spark';
+s.style.left='50%';
+s.style.top='45%';
+s.style.setProperty('--x',(Math.random()*520-260)+'px');
+s.style.setProperty('--y',(Math.random()*420-210)+'px');
+s.style.animationDelay=(Math.random()*.12)+'s';
+b.appendChild(s);
+}
+setTimeout(()=>b.innerHTML='',900);
+}
+
+function celebrateWrong(){
+const f=document.getElementById('flash');
+f.className='flash red';
+setTimeout(()=>f.className='flash',700);
+const t=document.getElementById('thumb');
+t.classList.remove('show');
+void t.offsetWidth;
+t.classList.add('show');
+setTimeout(()=>t.classList.remove('show'),800);
+}
+
+function goNext(){
+if(i<questions.length-1){
+i++;
+chosen=false;
+render();
+}else result();
+}
+
+function result(){
+let msg=score>=9?'🔥 Quá đỉnh! Bạn rất hiểu TP.HCM!':score>=7?'👏 Rất tốt! Kiến thức TP.HCM của bạn khá xịn!':score>=5?'👍 Khá ổn! Ôn thêm một chút là lên trình!':'💪 Làm lại một vòng nữa nhé, lần sau sẽ cao điểm hơn!';
+game.innerHTML=`<div class="result"><div style="font-size:54px">🏆</div><h2>Hoàn thành!</h2><div class="score">${score}/10</div><p>${msg}</p><button class="next restart" onclick="restart()">🔄 Chơi lại</button></div>`;
+}
+
+function restart(){
+i=0;
+score=0;
+chosen=false;
+render();
+}
+
+render();
+</script>
+</body>
+</html>
